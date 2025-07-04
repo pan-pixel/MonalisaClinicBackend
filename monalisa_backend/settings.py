@@ -42,11 +42,11 @@ except ImportError:
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CSRF_TRUSTED_ORIGINS = ['https://*.monalisaclinic.com', 'https://*.railway.app']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = globals().get('DEBUG', True)
 
 ALLOWED_HOSTS = globals().get('ALLOWED_HOSTS', ['localhost', '127.0.0.1'])
+CSRF_TRUSTED_ORIGINS = ['https://*.monalisaclinic.com', 'https://monalisaclinic.up.railway.app']
 
 # Application definition
 INSTALLED_APPS = [
