@@ -1,0 +1,1 @@
+web: gunicorn monalisa_backend.wsgi
