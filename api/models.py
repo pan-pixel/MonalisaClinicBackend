@@ -162,11 +162,9 @@ class TreatmentStep(models.Model):
 
 class Treatment(models.Model):
     """Model for individual treatments"""
-    clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE, related_name='treatments', null=True, blank=True)
     category = models.ForeignKey(TreatmentCategory, on_delete=models.CASCADE, related_name='items')
     name = models.CharField(max_length=200)
     duration = models.CharField(max_length=50, help_text="e.g., '60 minutes', '1-2 hours'")
-    price = models.CharField(max_length=50, help_text="e.g., '$150', 'From $100'")
     description = models.TextField()
     image = models.ImageField(upload_to='treatments/')
     is_featured = models.BooleanField(default=False, help_text="Featured on landing page")
@@ -177,7 +175,25 @@ class Treatment(models.Model):
         ordering = ['order']
     
     def __str__(self):
-        return f"{self.clinic.name if self.clinic else 'No Clinic'} - {self.name}"
+        return self.name
+
+
+class TreatmentClinicPricing(models.Model):
+    """Model for treatment pricing at specific clinics"""
+    treatment = models.ForeignKey(Treatment, on_delete=models.CASCADE, related_name='clinic_pricing')
+    clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE, related_name='treatment_pricing')
+    price = models.CharField(max_length=50, help_text="e.g., '$150', 'From $100'")
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0, help_text="Display order for this clinic")
+    
+    class Meta:
+        ordering = ['order', 'clinic__name']
+        unique_together = ['treatment', 'clinic']  # Ensure one pricing per treatment-clinic combination
+        verbose_name = "Treatment Clinic Pricing"
+        verbose_name_plural = "Treatment Clinic Pricing"
+    
+    def __str__(self):
+        return f"{self.treatment.name} - {self.clinic.name} - {self.price}"
 
 
 class TreatmentFAQ(models.Model):

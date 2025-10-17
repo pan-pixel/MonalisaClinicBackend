@@ -121,7 +121,7 @@ class AboutUsAdmin(admin.ModelAdmin):
 class TreatmentInline(admin.TabularInline):
     model = Treatment
     extra = 1
-    fields = ['clinic', 'name', 'duration', 'price', 'is_featured', 'order', 'is_active']
+    fields = ['name', 'duration', 'is_featured', 'order', 'is_active']
     list_editable = ['order', 'is_active', 'is_featured']
 
 
@@ -152,22 +152,29 @@ class TreatmentCategoryAdmin(admin.ModelAdmin):
     treatment_count.short_description = "Treatments"
 
 
+class TreatmentClinicPricingInline(admin.TabularInline):
+    model = TreatmentClinicPricing
+    extra = 1
+    fields = ['clinic', 'price', 'order', 'is_active']
+    list_editable = ['order', 'is_active']
+
+
 @admin.register(Treatment)
 class TreatmentAdmin(admin.ModelAdmin):
-    list_display = ['name', 'clinic', 'category', 'price', 'duration', 'is_featured', 'order', 'is_active', 'image_preview']
-    list_filter = ['clinic', 'category', 'is_featured', 'is_active']
-    search_fields = ['name', 'description', 'clinic__name']
+    list_display = ['name', 'category', 'duration', 'is_featured', 'order', 'is_active', 'image_preview', 'clinic_count']
+    list_filter = ['category', 'is_featured', 'is_active']
+    search_fields = ['name', 'description']
     list_editable = ['order', 'is_active', 'is_featured']
-    inlines = [TreatmentBenefitInline, TreatmentStepInline]
+    inlines = [TreatmentClinicPricingInline, TreatmentBenefitInline, TreatmentStepInline]
     fieldsets = (
-        ('Clinic & Category', {
-            'fields': ('clinic', 'category')
+        ('Category', {
+            'fields': ('category',)
         }),
         ('Basic Information', {
             'fields': ('name', 'description')
         }),
-        ('Pricing & Duration', {
-            'fields': ('price', 'duration')
+        ('Duration', {
+            'fields': ('duration',)
         }),
         ('Image', {
             'fields': ('image', 'image_preview')
@@ -183,6 +190,29 @@ class TreatmentAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="max-height: 80px;" />', obj.image.url)
         return "No image"
     image_preview.short_description = "Image"
+    
+    def clinic_count(self, obj):
+        return obj.clinic_pricing.filter(is_active=True).count()
+    clinic_count.short_description = "Active Clinics"
+
+
+@admin.register(TreatmentClinicPricing)
+class TreatmentClinicPricingAdmin(admin.ModelAdmin):
+    list_display = ['treatment', 'clinic', 'price', 'order', 'is_active']
+    list_filter = ['is_active', 'clinic', 'treatment__category']
+    search_fields = ['treatment__name', 'clinic__name', 'price']
+    list_editable = ['price', 'order', 'is_active']
+    fieldsets = (
+        ('Treatment & Clinic', {
+            'fields': ('treatment', 'clinic')
+        }),
+        ('Pricing', {
+            'fields': ('price',)
+        }),
+        ('Display Options', {
+            'fields': ('order', 'is_active')
+        }),
+    )
 
 
 @admin.register(TreatmentBenefit)

@@ -54,27 +54,29 @@ def treatments_api(request):
     
     if is_landing:
         # Return featured treatments for landing page
-        treatments = Treatment.objects.filter(is_active=True, is_featured=True)
+        treatments = Treatment.objects.filter(is_active=True, is_featured=True).prefetch_related('clinic_pricing__clinic')
         if clinic_id:
-            treatments = treatments.filter(clinic_id=clinic_id)
-        serializer = TreatmentLandingSerializer(treatments, many=True, context={'request': request})
+            # Filter treatments that have pricing for the specific clinic
+            treatments = treatments.filter(clinic_pricing__clinic_id=clinic_id, clinic_pricing__is_active=True)
+        serializer = TreatmentLandingSerializer(treatments, many=True, context={'request': request, 'clinic_id': clinic_id})
         return Response(serializer.data)
     else:
         # Return treatment categories with items for normal page
-        categories = TreatmentCategory.objects.filter(is_active=True).prefetch_related('items')
+        categories = TreatmentCategory.objects.filter(is_active=True).prefetch_related('items__clinic_pricing__clinic')
         
         result = []
         for category in categories:
             treatments = category.items.filter(is_active=True)
             if clinic_id:
-                treatments = treatments.filter(clinic_id=clinic_id)
+                # Filter treatments that have pricing for the specific clinic
+                treatments = treatments.filter(clinic_pricing__clinic_id=clinic_id, clinic_pricing__is_active=True)
             
             if treatments.exists():  # Only include categories that have treatments
                 category_data = {
                     "id": category.id,
                     "title": category.title,
                     "description": category.description,
-                    "items": TreatmentItemSerializer(treatments, many=True, context={'request': request}).data
+                    "items": TreatmentItemSerializer(treatments, many=True, context={'request': request, 'clinic_id': clinic_id}).data
                 }
                 result.append(category_data)
         
@@ -261,9 +263,25 @@ class BlogDetailAPIView(generics.RetrieveUpdateAPIView):
 @api_view(['GET'])
 def treatment_detail_api(request, treatment_id):
     """API view for detailed treatment information"""
+    clinic_id = request.query_params.get('clinic_id', None)
+    
     try:
-        treatment = Treatment.objects.get(id=treatment_id, is_active=True)
-        serializer = TreatmentDetailSerializer(treatment, context={'request': request})
+        treatment = Treatment.objects.filter(id=treatment_id, is_active=True).prefetch_related('clinic_pricing__clinic').first()
+        if not treatment:
+            return Response(
+                {"error": "Treatment not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # Check if treatment is available at the specified clinic
+        if clinic_id:
+            if not treatment.clinic_pricing.filter(clinic_id=clinic_id, is_active=True).exists():
+                return Response(
+                    {"error": "Treatment not available at this clinic"},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+        
+        serializer = TreatmentDetailSerializer(treatment, context={'request': request, 'clinic_id': clinic_id})
         return Response(serializer.data)
     except Treatment.DoesNotExist:
         return Response(
@@ -300,8 +318,14 @@ def clinic_treatments_api(request, clinic_id):
     """API view for treatments specific to a clinic"""
     try:
         clinic = get_object_or_404(Clinic, id=clinic_id, is_active=True)
-        treatments = Treatment.objects.filter(clinic=clinic, is_active=True).order_by('order', 'name')
-        serializer = TreatmentItemSerializer(treatments, many=True, context={'request': request})
+        # Get treatments that have pricing for this clinic
+        treatments = Treatment.objects.filter(
+            clinic_pricing__clinic=clinic, 
+            clinic_pricing__is_active=True,
+            is_active=True
+        ).prefetch_related('clinic_pricing__clinic').distinct().order_by('order', 'name')
+        
+        serializer = TreatmentItemSerializer(treatments, many=True, context={'request': request, 'clinic_id': clinic_id})
         
         return Response({
             'clinic': {

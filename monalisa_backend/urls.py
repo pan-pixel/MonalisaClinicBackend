@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 # Admin customization
 admin.site.site_header = "Monalisa Wellness Admin"
@@ -25,6 +26,7 @@ admin.site.site_title = "Monalisa Wellness Admin Portal"
 admin.site.index_title = "Welcome to Monalisa Wellness Admin Portal"
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/admin/', permanent=False), name='home'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
 ]

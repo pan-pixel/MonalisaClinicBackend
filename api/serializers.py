@@ -194,14 +194,24 @@ class AboutUsSerializer(serializers.ModelSerializer):
         return data
 
 
+class TreatmentClinicPricingSerializer(serializers.ModelSerializer):
+    """Serializer for treatment pricing at specific clinics"""
+    clinic_name = serializers.CharField(source='clinic.name', read_only=True)
+    clinic_id = serializers.IntegerField(source='clinic.id', read_only=True)
+    
+    class Meta:
+        model = TreatmentClinicPricing
+        fields = ['clinic_id', 'clinic_name', 'price', 'order', 'is_active']
+
+
 class TreatmentItemSerializer(serializers.ModelSerializer):
     """Serializer for individual treatments"""
     image = serializers.SerializerMethodField()
-    clinic_name = serializers.CharField(source='clinic.name', read_only=True)
+    clinic_pricing = serializers.SerializerMethodField()
     
     class Meta:
         model = Treatment
-        fields = ['id', 'name', 'clinic_name', 'duration', 'price', 'description', 'image', 'is_active']
+        fields = ['id', 'name', 'duration', 'description', 'image', 'is_active', 'clinic_pricing']
     
     def get_image(self, obj):
         if obj.image:
@@ -210,16 +220,28 @@ class TreatmentItemSerializer(serializers.ModelSerializer):
                 return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return ""
+    
+    def get_clinic_pricing(self, obj):
+        """Get pricing for all clinics where this treatment is available"""
+        clinic_id = self.context.get('clinic_id')
+        if clinic_id:
+            # Filter pricing for specific clinic
+            pricing = obj.clinic_pricing.filter(clinic_id=clinic_id, is_active=True)
+        else:
+            # Get all active pricing
+            pricing = obj.clinic_pricing.filter(is_active=True)
+        
+        return TreatmentClinicPricingSerializer(pricing, many=True).data
 
 
 class TreatmentLandingSerializer(serializers.ModelSerializer):
     """Serializer for treatments on landing page"""
     image = serializers.SerializerMethodField()
-    clinic_name = serializers.CharField(source='clinic.name', read_only=True)
+    clinic_pricing = serializers.SerializerMethodField()
     
     class Meta:
         model = Treatment
-        fields = ['id', 'name', 'clinic_name', 'description', 'image', 'price', 'duration']
+        fields = ['id', 'name', 'description', 'image', 'duration', 'clinic_pricing']
     
     def get_image(self, obj):
         if obj.image:
@@ -228,6 +250,18 @@ class TreatmentLandingSerializer(serializers.ModelSerializer):
                 return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return ""
+    
+    def get_clinic_pricing(self, obj):
+        """Get pricing for all clinics where this treatment is available"""
+        clinic_id = self.context.get('clinic_id')
+        if clinic_id:
+            # Filter pricing for specific clinic
+            pricing = obj.clinic_pricing.filter(clinic_id=clinic_id, is_active=True)
+        else:
+            # Get all active pricing
+            pricing = obj.clinic_pricing.filter(is_active=True)
+        
+        return TreatmentClinicPricingSerializer(pricing, many=True).data
 
 
 class TreatmentCategorySerializer(serializers.ModelSerializer):
@@ -540,12 +574,13 @@ class TreatmentDetailSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
     benefits = serializers.SerializerMethodField()
     steps = serializers.SerializerMethodField()
+    clinic_pricing = serializers.SerializerMethodField()
     
     class Meta:
         model = Treatment
         fields = [
-            'id', 'name', 'category', 'duration', 'price', 'description',
-            'image', 'is_featured', 'order', 'is_active', 'benefits', 'steps'
+            'id', 'name', 'category', 'duration', 'description',
+            'image', 'is_featured', 'order', 'is_active', 'benefits', 'steps', 'clinic_pricing'
         ]
     
     def get_image(self, obj):
@@ -565,6 +600,18 @@ class TreatmentDetailSerializer(serializers.ModelSerializer):
         """Get steps specific to this treatment"""
         steps = obj.steps.filter(is_active=True)
         return TreatmentStepSerializer(steps, many=True).data
+    
+    def get_clinic_pricing(self, obj):
+        """Get pricing for all clinics where this treatment is available"""
+        clinic_id = self.context.get('clinic_id')
+        if clinic_id:
+            # Filter pricing for specific clinic
+            pricing = obj.clinic_pricing.filter(clinic_id=clinic_id, is_active=True)
+        else:
+            # Get all active pricing
+            pricing = obj.clinic_pricing.filter(is_active=True)
+        
+        return TreatmentClinicPricingSerializer(pricing, many=True).data
 
 
 class WhyChooseUsSerializer(serializers.ModelSerializer):
@@ -705,7 +752,13 @@ class ClinicDetailSerializer(serializers.ModelSerializer):
         return ClinicTeamMemberSerializer(team_members, many=True, context=self.context).data
     
     def get_treatments(self, obj):
-        treatments = obj.treatments.filter(is_active=True).order_by('order', 'name')
+        # Get treatments that have pricing for this clinic
+        from .models import Treatment
+        treatments = Treatment.objects.filter(
+            clinic_pricing__clinic=obj, 
+            clinic_pricing__is_active=True,
+            is_active=True
+        ).prefetch_related('clinic_pricing__clinic').distinct().order_by('order', 'name')
         return TreatmentItemSerializer(treatments, many=True, context=self.context).data
     
     def get_offers(self, obj):
