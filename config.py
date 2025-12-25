@@ -27,7 +27,7 @@ AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
 # SECRET_KEY = os.getenv('SECRET_KEY')
 SECRET_KEY = 'django-insecure-fallback-key'
 # DEBUG = os.getenv('DEBUG')
-DEBUG = os.getenv('DEBUG')
+DEBUG = os.getenv('DEBUG') == 'True'
 ALLOWED_HOSTS = ['*']
 
 # Email Configuration (for appointment notifications)

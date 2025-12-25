@@ -16,6 +16,8 @@ urlpatterns = [
     
     # Treatment endpoints
     path('treatments/', views.treatments_api, name='treatments'),
+    path('treatments/categories/', views.treatment_categories_api, name='treatment_categories'),
+    path('treatments/categories/nav/', views.treatment_categories_nav_api, name='treatment_categories_nav'),
     path('treatments/<int:treatment_id>/', views.treatment_detail_api, name='treatment_detail'),
     path('treatments/faq/', views.TreatmentFAQAPIView.as_view(), name='treatment_faq'),
     
@@ -49,6 +51,9 @@ urlpatterns = [
     
     # Contact message
     path('contact/', views.ContactMessageCreateAPIView.as_view(), name='contact_create'),
+    
+    # Testimonials
+    path('testimonials/', views.TestimonialAPIView.as_view(), name='testimonials'),
     
     # Site settings
     path('site-settings/', views.site_settings_api, name='site_settings'),

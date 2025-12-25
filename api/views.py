@@ -47,10 +47,72 @@ def about_us_api(request):
 
 
 @api_view(['GET'])
+def treatment_categories_nav_api(request):
+    """API view for treatment categories with limited treatments for navbar mega menu"""
+    limit = int(request.query_params.get('limit', 6))
+    
+    categories = TreatmentCategory.objects.filter(is_active=True).prefetch_related('items__clinic_pricing__clinic')
+    
+    result = []
+    for category in categories:
+        treatments = category.items.filter(is_active=True)[:limit]
+        
+        if treatments.exists():
+            treatment_items = []
+            for treatment in treatments:
+                treatment_items.append({
+                    "id": treatment.id,
+                    "name": treatment.name,
+                })
+            
+            category_data = {
+                "id": category.id,
+                "title": category.title,
+                "description": category.description,
+                "treatments": treatment_items,
+                "total_count": category.items.filter(is_active=True).count()
+            }
+            result.append(category_data)
+    
+    return Response(result)
+
+
+@api_view(['GET'])
+def treatment_categories_api(request):
+    """API view for treatment categories list (for categories page)"""
+    categories = TreatmentCategory.objects.filter(is_active=True)
+    
+    result = []
+    for category in categories:
+        treatment_count = category.items.filter(is_active=True).count()
+        if treatment_count > 0:
+            # Get first treatment image as category thumbnail
+            first_treatment = category.items.filter(is_active=True).first()
+            thumbnail = ""
+            if first_treatment and first_treatment.image:
+                if request:
+                    thumbnail = request.build_absolute_uri(first_treatment.image.url)
+                else:
+                    thumbnail = first_treatment.image.url
+            
+            category_data = {
+                "id": category.id,
+                "title": category.title,
+                "description": category.description,
+                "treatment_count": treatment_count,
+                "thumbnail": thumbnail
+            }
+            result.append(category_data)
+    
+    return Response(result)
+
+
+@api_view(['GET'])
 def treatments_api(request):
     """API view for treatments with isLanding parameter and optional clinic filter"""
     is_landing = request.query_params.get('isLanding', 'false').lower() == 'true'
     clinic_id = request.query_params.get('clinic_id', None)
+    category_id = request.query_params.get('category_id', None)
     
     if is_landing:
         # Return featured treatments for landing page
@@ -63,6 +125,10 @@ def treatments_api(request):
     else:
         # Return treatment categories with items for normal page
         categories = TreatmentCategory.objects.filter(is_active=True).prefetch_related('items__clinic_pricing__clinic')
+        
+        # Filter by category if specified
+        if category_id:
+            categories = categories.filter(id=category_id)
         
         result = []
         for category in categories:
@@ -153,6 +219,17 @@ class AppointmentCreateAPIView(generics.CreateAPIView):
             },
             status=status.HTTP_201_CREATED
         )
+
+
+class TestimonialAPIView(generics.ListAPIView):
+    """API view for testimonials (Google review screenshots)"""
+    serializer_class = TestimonialSerializer
+    queryset = Testimonial.objects.filter(is_active=True)
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
 
 class ContactMessageCreateAPIView(generics.CreateAPIView):
@@ -400,7 +477,9 @@ def site_settings_api(request):
                 "social_facebook": "",
                 "social_instagram": "",
                 "social_twitter": "",
-                "business_hours": "Monday - Sunday: Open Daily\nCloses at: 7:30 PM\nCall for specific timings"
+                "business_hours": "Monday - Sunday: Open Daily\nCloses at: 7:30 PM\nCall for specific timings",
+                "offers_strip_color": "#DC2626",
+                "offers_strip_gradient_color": "#B91C1C"
             })
     except Exception as e:
         return Response(
@@ -422,7 +501,9 @@ def api_endpoints(request):
     endpoints = {
         "Landing Page Background": "/api/landing-bg/",
         "About Us": "/api/about-us/ (add ?isLanding=true for landing page)",
-        "Treatments": "/api/treatments/ (add ?isLanding=true for featured treatments)",
+        "Treatments": "/api/treatments/ (add ?isLanding=true for featured, ?category_id=X for category filter)",
+        "Treatment Categories": "/api/treatments/categories/ (for categories page)",
+        "Treatment Categories Nav": "/api/treatments/categories/nav/ (for navbar mega menu, ?limit=6)",
         "Treatment Detail": "/api/treatments/{id}/",
         "Treatment FAQs": "/api/treatments/faq/",
         "Blog List & Create": "/api/blogs/ (GET: list, POST: create)",
@@ -435,6 +516,7 @@ def api_endpoints(request):
         "Clinic Detail": "/api/clinics/{id}/",
         "Book Appointment": "/api/appointments/ (POST)",
         "Contact Message": "/api/contact/ (POST)",
+        "Testimonials": "/api/testimonials/",
         "Site Settings": "/api/site-settings/",
         "Health Check": "/api/health/",
         "API Endpoints": "/api/endpoints/",

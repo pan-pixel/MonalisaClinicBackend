@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator, EmailValidator
 from django.utils import timezone
+from colorfield.fields import ColorField
 import json
 
 
@@ -166,7 +167,7 @@ class Treatment(models.Model):
     name = models.CharField(max_length=200)
     duration = models.CharField(max_length=50, help_text="e.g., '60 minutes', '1-2 hours'")
     description = models.TextField()
-    image = models.ImageField(upload_to='treatments/')
+    image = models.ImageField(upload_to='treatments/', blank=True, null=True)
     is_featured = models.BooleanField(default=False, help_text="Featured on landing page")
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
@@ -422,7 +423,7 @@ class Clinic(models.Model):
     description = models.TextField(help_text="Detailed description of the clinic")
     address = models.TextField()
     city = models.CharField(max_length=100)
-    phone = models.CharField(max_length=20)
+    phone = models.CharField(max_length=50)
     email = models.EmailField()
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=5.0)
     reviews_count = models.PositiveIntegerField(default=0)
@@ -522,6 +523,17 @@ class SiteSettings(models.Model):
         blank=True, 
         help_text="Business hours information. Use full format like 'Monday-Friday: 9:00 AM - 7:30 PM' to avoid formatting issues."
     )
+    
+    # Offers strip customization
+    offers_strip_color = ColorField(
+        default="#DC2626",
+        help_text="Color for the offers strip banner. Default: #DC2626 (red)"
+    )
+    offers_strip_gradient_color = ColorField(
+        default="#B91C1C",
+        blank=True,
+        help_text="Optional gradient color for the offers strip. If left blank, will use a darker shade of the main color."
+    )
 
     class Meta:
         verbose_name = "Site Settings"
@@ -594,6 +606,47 @@ class SiteSettings(models.Model):
         """Remove a contact phone"""
         if self.contact_phones and phone in self.contact_phones:
             self.contact_phones.remove(phone)
+
+
+class Testimonial(models.Model):
+    """Model for Google review testimonials (screenshots)"""
+    screenshot = models.ImageField(
+        upload_to='testimonials/',
+        help_text="Screenshot of the Google review"
+    )
+    reviewer_name = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="Name of the reviewer (optional, for SEO)"
+    )
+    review_text = models.TextField(
+        blank=True,
+        help_text="Text content of the review (optional, for SEO and accessibility)"
+    )
+    rating = models.PositiveIntegerField(
+        default=5,
+        choices=[(i, i) for i in range(1, 6)],
+        help_text="Rating out of 5 stars"
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        help_text="Display order (lower numbers appear first)"
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text="Whether this testimonial should be displayed"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['order', '-created_at']
+        verbose_name = "Testimonial"
+        verbose_name_plural = "Testimonials"
+    
+    def __str__(self):
+        name = self.reviewer_name or "Anonymous"
+        return f"{name} - {self.rating} stars"
 
 
 class Offer(models.Model):

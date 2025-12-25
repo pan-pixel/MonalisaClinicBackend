@@ -523,8 +523,12 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ('Social Media', {
             'fields': ('social_facebook', 'social_instagram', 'social_twitter')
         }),
+        ('Offers Strip Customization', {
+            'fields': ('offers_strip_color', 'offers_strip_gradient_color', 'offers_strip_preview'),
+            'description': 'Customize the color of the promotional offers strip at the top of the website. Use hex color codes (e.g., #DC2626 for red, #1F2937 for dark gray). If gradient color is left blank, a darker shade will be auto-generated.'
+        }),
     )
-    readonly_fields = ['all_emails_display', 'all_phones_display']
+    readonly_fields = ['all_emails_display', 'all_phones_display', 'offers_strip_preview']
     
     def all_emails_display(self, obj):
         """Display all contact emails in a readable format"""
@@ -547,6 +551,23 @@ class SiteSettingsAdmin(admin.ModelAdmin):
             return format_html("<em>No contact phone numbers found</em>")
         return ""
     all_phones_display.short_description = "All Contact Phones (Combined)"
+    
+    def offers_strip_preview(self, obj):
+        """Display a preview of the offers strip color"""
+        if obj:
+            main_color = obj.offers_strip_color or '#DC2626'
+            gradient_color = obj.offers_strip_gradient_color or '#B91C1C'
+            return format_html(
+                '<div style="padding: 15px; background: linear-gradient(to right, {}, {}, {}); '
+                'border-radius: 4px; color: white; text-align: center; font-weight: bold; margin-top: 10px;">'
+                'Offers Strip Preview<br>'
+                '<small style="opacity: 0.9;">Main: {} | Gradient: {}</small>'
+                '</div>',
+                main_color, gradient_color, main_color,
+                main_color, gradient_color
+            )
+        return ""
+    offers_strip_preview.short_description = "Color Preview"
     
     def get_form(self, request, obj=None, **kwargs):
         """Customize the form to add help text and better widget for JSON fields"""
@@ -573,6 +594,17 @@ class SiteSettingsAdmin(admin.ModelAdmin):
                 '"Monday-Friday: 9:00 AM - 7:30 PM\\nSaturday-Sunday: 10:00 AM - 6:00 PM\\nCall for specific timings"'
             )
             form.base_fields['business_hours'].widget.attrs['rows'] = 4
+        
+        # ColorField automatically provides a color picker widget, so we just need to add help text
+        if 'offers_strip_color' in form.base_fields:
+            form.base_fields['offers_strip_color'].help_text = (
+                'Click the color box to open a color picker. Default: #DC2626 (red)'
+            )
+            
+        if 'offers_strip_gradient_color' in form.base_fields:
+            form.base_fields['offers_strip_gradient_color'].help_text = (
+                'Optional: Click the color box to pick a gradient color. If left blank, a darker shade of the main color will be auto-generated.'
+            )
         
         return form
     
@@ -703,6 +735,38 @@ class ClinicTeamMemberAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="max-height: 80px; border-radius: 50%;" />', obj.image.url)
         return "No image"
     image_preview.short_description = "Photo"
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ['reviewer_name', 'rating', 'order', 'is_active', 'screenshot_preview', 'created_at']
+    list_filter = ['is_active', 'rating', 'created_at']
+    search_fields = ['reviewer_name', 'review_text']
+    list_editable = ['order', 'is_active', 'rating']
+    fieldsets = (
+        ('Review Screenshot', {
+            'fields': ('screenshot', 'screenshot_preview'),
+            'description': 'Upload a screenshot of the Google review'
+        }),
+        ('Review Details (Optional - for SEO)', {
+            'fields': ('reviewer_name', 'review_text', 'rating'),
+            'classes': ('collapse',),
+            'description': 'Optional details for SEO and accessibility. The screenshot will be displayed primarily.'
+        }),
+        ('Display Options', {
+            'fields': ('order', 'is_active')
+        }),
+    )
+    readonly_fields = ['screenshot_preview', 'created_at']
+    
+    def screenshot_preview(self, obj):
+        if obj.screenshot:
+            return format_html(
+                '<img src="{}" style="max-height: 200px; max-width: 300px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />',
+                obj.screenshot.url
+            )
+        return "No screenshot"
+    screenshot_preview.short_description = "Screenshot Preview"
 
 
 @admin.register(Offer)

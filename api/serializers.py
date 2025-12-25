@@ -19,7 +19,9 @@ class SiteSettingsSerializer(serializers.ModelSerializer):
             # Legacy fields for backward compatibility
             'contact_email', 'contact_phone', 
             'address', 'social_facebook', 'social_instagram', 
-            'social_twitter', 'business_hours'
+            'social_twitter', 'business_hours',
+            # Offers strip customization
+            'offers_strip_color', 'offers_strip_gradient_color'
         ]
     
     def get_all_contact_emails(self, obj):
@@ -620,6 +622,23 @@ class WhyChooseUsSerializer(serializers.ModelSerializer):
     class Meta:
         model = WhyChooseUs
         fields = ['id', 'title', 'description', 'icon', 'order']
+
+
+class TestimonialSerializer(serializers.ModelSerializer):
+    """Serializer for testimonials (Google review screenshots)"""
+    screenshot = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Testimonial
+        fields = ['id', 'screenshot', 'reviewer_name', 'review_text', 'rating', 'order', 'is_active', 'created_at']
+    
+    def get_screenshot(self, obj):
+        if obj.screenshot:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.screenshot.url)
+            return obj.screenshot.url
+        return ""
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):
