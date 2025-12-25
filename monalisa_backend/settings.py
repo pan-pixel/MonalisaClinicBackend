@@ -183,7 +183,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://monalisaclinic.up.railway.app",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only for development
+CORS_ALLOW_ALL_ORIGINS = True  # Only for development
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
