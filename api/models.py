@@ -614,6 +614,12 @@ class Testimonial(models.Model):
         upload_to='testimonials/',
         help_text="Screenshot of the Google review"
     )
+    user_image = models.ImageField(
+        upload_to='testimonials/users/',
+        blank=True,
+        null=True,
+        help_text="Profile picture of the reviewer (optional)"
+    )
     reviewer_name = models.CharField(
         max_length=200,
         blank=True,

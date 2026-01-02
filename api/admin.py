@@ -739,17 +739,21 @@ class ClinicTeamMemberAdmin(admin.ModelAdmin):
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ['reviewer_name', 'rating', 'order', 'is_active', 'screenshot_preview', 'created_at']
+    list_display = ['reviewer_name', 'rating', 'order', 'is_active', 'user_image_preview', 'screenshot_preview', 'created_at']
     list_filter = ['is_active', 'rating', 'created_at']
     search_fields = ['reviewer_name', 'review_text']
     list_editable = ['order', 'is_active', 'rating']
     fieldsets = (
+        ('User Information', {
+            'fields': ('user_image', 'user_image_preview', 'reviewer_name'),
+            'description': 'Upload a profile picture of the reviewer (optional)'
+        }),
         ('Review Screenshot', {
             'fields': ('screenshot', 'screenshot_preview'),
             'description': 'Upload a screenshot of the Google review'
         }),
         ('Review Details (Optional - for SEO)', {
-            'fields': ('reviewer_name', 'review_text', 'rating'),
+            'fields': ('review_text', 'rating'),
             'classes': ('collapse',),
             'description': 'Optional details for SEO and accessibility. The screenshot will be displayed primarily.'
         }),
@@ -757,7 +761,7 @@ class TestimonialAdmin(admin.ModelAdmin):
             'fields': ('order', 'is_active')
         }),
     )
-    readonly_fields = ['screenshot_preview', 'created_at']
+    readonly_fields = ['screenshot_preview', 'user_image_preview', 'created_at']
     
     def screenshot_preview(self, obj):
         if obj.screenshot:
@@ -767,6 +771,15 @@ class TestimonialAdmin(admin.ModelAdmin):
             )
         return "No screenshot"
     screenshot_preview.short_description = "Screenshot Preview"
+    
+    def user_image_preview(self, obj):
+        if obj.user_image:
+            return format_html(
+                '<img src="{}" style="max-height: 150px; max-width: 150px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: cover;" />',
+                obj.user_image.url
+            )
+        return "No user image"
+    user_image_preview.short_description = "User Image Preview"
 
 
 @admin.register(Offer)

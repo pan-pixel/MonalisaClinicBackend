@@ -1743,3 +1743,409 @@ Watching for file changes with StatReloader
 "GET /api/treatments/categories/nav/?limit=6 HTTP/1.1" 200 1967
 "GET /api/why-choose-us/ HTTP/1.1" 200 565
 "GET /api/clinics/ HTTP/1.1" 200 1362
+Watching for file changes with StatReloader
+"GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+"GET /api/why-choose-us/ HTTP/1.1" 200 565
+"GET /api/landing-bg/ HTTP/1.1" 200 114
+"GET /api/offers/ HTTP/1.1" 200 397
+"GET /api/site-settings/ HTTP/1.1" 200 803
+"GET /api/results/ HTTP/1.1" 200 3336
+"GET /api/testimonials/ HTTP/1.1" 200 1051
+"GET /api/clinics/ HTTP/1.1" 200 1374
+"GET /api/skin-concerns/ HTTP/1.1" 200 10578
+"GET /api/site-settings/ HTTP/1.1" 200 803
+"GET /api/landing/faq/ HTTP/1.1" 200 52
+"GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+"GET /api/treatments/categories/nav/?limit=6 HTTP/1.1" 200 1967
+"GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+"GET /api/offers/ HTTP/1.1" 200 397
+"GET /api/testimonials/ HTTP/1.1" 200 1051
+"GET /api/results/ HTTP/1.1" 200 3336
+"GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+"GET /api/site-settings/ HTTP/1.1" 200 803
+"GET /api/landing/faq/ HTTP/1.1" 200 52
+"GET /api/site-settings/ HTTP/1.1" 200 803
+"GET /api/landing-bg/ HTTP/1.1" 200 114
+"GET /api/skin-concerns/ HTTP/1.1" 200 10578
+"GET /api/why-choose-us/ HTTP/1.1" 200 565
+"GET /api/clinics/ HTTP/1.1" 200 1374
+"GET /api/site-settings/ HTTP/1.1" 200 803
+"GET /api/landing-bg/ HTTP/1.1" 200 114
+"GET /api/why-choose-us/ HTTP/1.1" 200 565
+"GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+"GET /api/testimonials/ HTTP/1.1" 200 1051
+"GET /api/clinics/ HTTP/1.1" 200 1374
+"GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+"GET /api/results/ HTTP/1.1" 200 3336
+"GET /api/offers/ HTTP/1.1" 200 397
+"GET /api/skin-concerns/ HTTP/1.1" 200 10578
+"GET /api/landing/faq/ HTTP/1.1" 200 52
+"GET /api/site-settings/ HTTP/1.1" 200 803
+"OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+"OPTIONS /api/offers/ HTTP/1.1" 200 0
+"OPTIONS /api/treatments/?isLanding=true HTTP/1.1" 200 0
+"OPTIONS /api/testimonials/ HTTP/1.1" 200 0
+"OPTIONS /api/about-us/?isLanding=true HTTP/1.1" 200 0
+"OPTIONS /api/landing-bg/ HTTP/1.1" 200 0
+"OPTIONS /api/why-choose-us/ HTTP/1.1" 200 0
+"OPTIONS /api/results/ HTTP/1.1" 200 0
+"OPTIONS /api/landing/faq/ HTTP/1.1" 200 0
+"OPTIONS /api/skin-concerns/ HTTP/1.1" 200 0
+"OPTIONS /api/clinics/ HTTP/1.1" 200 0
+"OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+"GET /api/site-settings/ HTTP/1.1" 200 803
+"GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+"GET /api/why-choose-us/ HTTP/1.1" 200 565
+"GET /api/landing-bg/ HTTP/1.1" 200 114
+"GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+"GET /api/skin-concerns/ HTTP/1.1" 200 10578
+"GET /api/testimonials/ HTTP/1.1" 200 1051
+"GET /api/results/ HTTP/1.1" 200 3336
+"GET /api/landing/faq/ HTTP/1.1" 200 52
+"GET /api/offers/ HTTP/1.1" 200 397
+"GET /api/site-settings/ HTTP/1.1" 200 803
+"GET /api/clinics/ HTTP/1.1" 200 1374
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"OPTIONS /api/landing-bg/ HTTP/1.1" 200 0
+"OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+"OPTIONS /api/about-us/?isLanding=true HTTP/1.1" 200 0
+"OPTIONS /api/why-choose-us/ HTTP/1.1" 200 0
+"OPTIONS /api/offers/ HTTP/1.1" 200 0
+"OPTIONS /api/treatments/?isLanding=true HTTP/1.1" 200 0
+"OPTIONS /api/results/ HTTP/1.1" 200 0
+"OPTIONS /api/testimonials/ HTTP/1.1" 200 0
+"OPTIONS /api/skin-concerns/ HTTP/1.1" 200 0
+"OPTIONS /api/clinics/ HTTP/1.1" 200 0
+"OPTIONS /api/landing/faq/ HTTP/1.1" 200 0
+"OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+"GET /api/site-settings/ HTTP/1.1" 200 807
+"GET /api/landing-bg/ HTTP/1.1" 200 115
+"GET /api/offers/ HTTP/1.1" 200 2
+"GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+"GET /api/why-choose-us/ HTTP/1.1" 200 565
+"GET /api/results/ HTTP/1.1" 200 3336
+"GET /api/clinics/ HTTP/1.1" 200 1374
+"GET /api/skin-concerns/ HTTP/1.1" 200 10578
+"OPTIONS /api/treatments/categories/nav/?limit=6 HTTP/1.1" 200 0
+"GET /api/testimonials/ HTTP/1.1" 200 1051
+"GET /api/landing/faq/ HTTP/1.1" 200 52
+"GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+"GET /api/site-settings/ HTTP/1.1" 200 807
+"GET /api/treatments/categories/nav/?limit=6 HTTP/1.1" 200 1967
+"GET /api/site-settings/ HTTP/1.1" 200 807
+"GET /api/clinics/ HTTP/1.1" 200 1374
+"OPTIONS /api/clinics/1/treatments/ HTTP/1.1" 200 0
+"GET /api/clinics/1/treatments/ HTTP/1.1" 200 1736
+"OPTIONS /api/clinics/1/offers/ HTTP/1.1" 200 0
+"GET /api/clinics/1/offers/ HTTP/1.1" 200 154
+"OPTIONS /api/appointments/ HTTP/1.1" 200 0
+Bad Request: /api/appointments/
+"POST /api/appointments/ HTTP/1.1" 400 96
+Bad Request: /api/appointments/
+"POST /api/appointments/ HTTP/1.1" 400 96
+"POST /api/appointments/ HTTP/1.1" 201 102
+"GET /api/treatments/categories/nav/?limit=6 HTTP/1.1" 200 1967
+"GET /api/clinics/ HTTP/1.1" 200 1374
+/Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/api/serializers.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:18:48 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:19:01 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:19:02 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:19:13 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:19:14 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:19:26 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:19:27 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:19:56 django.server "GET /api/clinics/1/treatments/ HTTP/1.1" 200 1736
+[INFO] 2025-12-31 13:19:56 django.server "GET /api/clinics/1/offers/ HTTP/1.1" 200 154
+[INFO] 2025-12-31 13:20:24 api.serializers Starting email thread for appointment ID: 4
+[INFO] 2025-12-31 13:20:24 api.serializers ============================================================
+[INFO] 2025-12-31 13:20:24 api.serializers Email thread started (daemon=True)
+[INFO] 2025-12-31 13:20:24 api.serializers EMAIL SENDING PROCESS STARTED
+[INFO] 2025-12-31 13:20:24 api.serializers ============================================================
+[INFO] 2025-12-31 13:20:24 api.serializers Email Backend: django.core.mail.backends.smtp.EmailBackend
+[INFO] 2025-12-31 13:20:24 api.serializers Email Host: smtp.gmail.com
+[INFO] 2025-12-31 13:20:24 api.serializers Email Port: 587
+[INFO] 2025-12-31 13:20:24 django.server "POST /api/appointments/ HTTP/1.1" 201 102
+[INFO] 2025-12-31 13:20:24 api.serializers Email Use TLS: True
+[INFO] 2025-12-31 13:20:24 api.serializers Email Host User: notificationthemonalisaclinic@gmail.com
+[INFO] 2025-12-31 13:20:24 api.serializers Email Host Password: SET
+[INFO] 2025-12-31 13:20:24 api.serializers Default From Email: notificationthemonalisaclinic@gmail.com
+[INFO] 2025-12-31 13:20:24 api.serializers Owner Email (Recipient): prathamarora333@gmail.com
+[INFO] 2025-12-31 13:20:24 api.serializers Email Timeout: 5
+[INFO] 2025-12-31 13:20:24 api.serializers Attempting to send email...
+[INFO] 2025-12-31 13:20:24 api.serializers Subject: New Appointment Request - Test2 Test2 at The Monalisa GTB- Best Skin, Hair & Laser Clinic in Delhi | Senior Dermatologist | Plastic surgeon
+[INFO] 2025-12-31 13:20:24 api.serializers From: notificationthemonalisaclinic@gmail.com
+[INFO] 2025-12-31 13:20:24 api.serializers To: prathamarora333@gmail.com
+[INFO] 2025-12-31 13:20:24 api.serializers Message length: 576 characters
+[ERROR] 2025-12-31 13:20:25 api.serializers ============================================================
+[ERROR] 2025-12-31 13:20:25 api.serializers EMAIL SENDING FAILED
+[ERROR] 2025-12-31 13:20:25 api.serializers ============================================================
+[ERROR] 2025-12-31 13:20:25 api.serializers Error Type: SSLCertVerificationError
+[ERROR] 2025-12-31 13:20:25 api.serializers Error Message: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:992)
+[ERROR] 2025-12-31 13:20:25 api.serializers Error Details: SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:992)')
+[ERROR] 2025-12-31 13:20:25 api.serializers Full Traceback:
+[ERROR] 2025-12-31 13:20:25 api.serializers Traceback (most recent call last):
+  File "/Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/api/serializers.py", line 496, in send_email_async
+    result = send_mail(
+             ^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/core/mail/__init__.py", line 88, in send_mail
+    return mail.send()
+           ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/core/mail/message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/core/mail/backends/smtp.py", line 128, in send_messages
+    new_conn_created = self.open()
+                       ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/core/mail/backends/smtp.py", line 93, in open
+    self.connection.starttls(context=self.ssl_context)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/smtplib.py", line 790, in starttls
+    self.sock = context.wrap_socket(self.sock,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/ssl.py", line 517, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/ssl.py", line 1075, in _create
+    self.do_handshake()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/ssl.py", line 1346, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:992)
+
+[ERROR] 2025-12-31 13:20:25 api.serializers Appointment ID: 4
+[ERROR] 2025-12-31 13:20:25 api.serializers Appointment Email: test@test.com
+[ERROR] 2025-12-31 13:20:25 api.serializers Appointment Name: Test2 Test2
+[ERROR] 2025-12-31 13:20:25 api.serializers ============================================================
+[INFO] 2025-12-31 13:21:46 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:21:46 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:22:13 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/config.py changed, reloading.
+[INFO] 2025-12-31 13:22:14 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:22:16 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:22:16 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:22:30 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:22:30 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:22:38 django.server "GET /api/clinics/1/treatments/ HTTP/1.1" 200 1736
+[INFO] 2025-12-31 13:22:39 django.server "GET /api/clinics/1/offers/ HTTP/1.1" 200 154
+[INFO] 2025-12-31 13:22:39 django.server "GET /api/clinics/1/treatments/ HTTP/1.1" 200 1736
+[INFO] 2025-12-31 13:22:52 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/config.py changed, reloading.
+[INFO] 2025-12-31 13:22:52 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:24:09 api.serializers Starting email thread for appointment ID: 5
+[INFO] 2025-12-31 13:24:09 api.serializers ============================================================
+[INFO] 2025-12-31 13:24:09 api.serializers Email thread started (daemon=True)
+[INFO] 2025-12-31 13:24:09 api.serializers EMAIL SENDING PROCESS STARTED
+[INFO] 2025-12-31 13:24:09 api.serializers ============================================================
+[INFO] 2025-12-31 13:24:09 api.serializers Email Backend: api.email_backend.CustomSMTPEmailBackend
+[INFO] 2025-12-31 13:24:09 django.server "POST /api/appointments/ HTTP/1.1" 201 102
+[INFO] 2025-12-31 13:24:09 api.serializers Email Host: smtp.gmail.com
+[INFO] 2025-12-31 13:24:09 api.serializers Email Port: 587
+[INFO] 2025-12-31 13:24:09 api.serializers Email Use TLS: True
+[INFO] 2025-12-31 13:24:09 api.serializers Email Host User: notificationthemonalisaclinic@gmail.com
+[INFO] 2025-12-31 13:24:09 api.serializers Email Host Password: SET
+[INFO] 2025-12-31 13:24:09 api.serializers Default From Email: notificationthemonalisaclinic@gmail.com
+[INFO] 2025-12-31 13:24:09 api.serializers Owner Email (Recipient): prathamarora333@gmail.com
+[INFO] 2025-12-31 13:24:09 api.serializers Email Timeout: 5
+[INFO] 2025-12-31 13:24:09 api.serializers Attempting to send email...
+[INFO] 2025-12-31 13:24:09 api.serializers Subject: New Appointment Request - test3 test3 at The Monalisa GTB- Best Skin, Hair & Laser Clinic in Delhi | Senior Dermatologist | Plastic surgeon
+[INFO] 2025-12-31 13:24:09 api.serializers From: notificationthemonalisaclinic@gmail.com
+[INFO] 2025-12-31 13:24:09 api.serializers To: prathamarora333@gmail.com
+[INFO] 2025-12-31 13:24:09 api.serializers Message length: 576 characters
+[WARNING] 2025-12-31 13:24:09 api.email_backend ============================================================
+[WARNING] 2025-12-31 13:24:09 api.email_backend SSL CERTIFICATE VERIFICATION IS DISABLED
+[WARNING] 2025-12-31 13:24:09 api.email_backend This should only be used in development/local environments!
+[WARNING] 2025-12-31 13:24:09 api.email_backend ============================================================
+[INFO] 2025-12-31 13:24:09 api.email_backend Using unverified SSL context (certificate verification disabled)
+[INFO] 2025-12-31 13:24:09 api.email_backend Attempting to connect to smtp.gmail.com:587
+[INFO] 2025-12-31 13:24:12 api.serializers ✓ Email sent successfully!
+[INFO] 2025-12-31 13:24:12 api.serializers Email result: 1
+[INFO] 2025-12-31 13:24:12 api.serializers ============================================================
+[INFO] 2025-12-31 13:24:12 api.serializers EMAIL SENDING PROCESS COMPLETED
+[INFO] 2025-12-31 13:24:12 api.serializers ============================================================
+[INFO] 2025-12-31 13:29:43 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/api/email_backend.py changed, reloading.
+[INFO] 2025-12-31 13:29:44 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:30:02 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/api/serializers.py changed, reloading.
+[INFO] 2025-12-31 13:30:03 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:30:06 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/config.py changed, reloading.
+[INFO] 2025-12-31 13:30:06 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:30:20 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:30:20 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:30:29 django.utils.autoreload /Users/prathamarora/Desktop/Monalisa_complete/MonalisaWellness/monalisa_backend/settings.py changed, reloading.
+[INFO] 2025-12-31 13:30:30 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:35:36 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/testimonials/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/results/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/offers/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/about-us/?isLanding=true HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/landing-bg/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/landing/faq/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/why-choose-us/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/clinics/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/treatments/?isLanding=true HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "OPTIONS /api/skin-concerns/ HTTP/1.1" 200 0
+[INFO] 2025-12-31 13:35:47 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2025-12-31 13:35:47 django.server "GET /api/offers/ HTTP/1.1" 200 2
+[INFO] 2025-12-31 13:35:47 django.server "GET /api/landing-bg/ HTTP/1.1" 200 115
+[INFO] 2025-12-31 13:35:47 django.server "GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+[INFO] 2025-12-31 13:35:47 django.server "GET /api/results/ HTTP/1.1" 200 3336
+[ERROR] 2025-12-31 13:35:48 django.request Internal Server Error: /api/testimonials/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column api_testimonial.user_image does not exist
+LINE 1: ...estimonial"."id", "api_testimonial"."screenshot", "api_testi...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/rest_framework/generics.py", line 203, in get
+    return self.list(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/rest_framework/mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/rest_framework/generics.py", line 175, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/rest_framework/pagination.py", line 222, in paginate_queryset
+    return list(self.page)
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/core/paginator.py", line 191, in __len__
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/models/query.py", line 384, in __len__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/models/query.py", line 1933, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1574, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: column api_testimonial.user_image does not exist
+LINE 1: ...estimonial"."id", "api_testimonial"."screenshot", "api_testi...
+                                                             ^
+
+[ERROR] 2025-12-31 13:35:48 django.server "GET /api/testimonials/ HTTP/1.1" 500 175399
+[INFO] 2025-12-31 13:35:48 django.server "GET /api/landing/faq/ HTTP/1.1" 200 52
+[INFO] 2025-12-31 13:35:48 django.server "GET /api/clinics/ HTTP/1.1" 200 1374
+[INFO] 2025-12-31 13:35:48 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2025-12-31 13:35:48 django.server "GET /api/why-choose-us/ HTTP/1.1" 200 565
+[INFO] 2025-12-31 13:35:48 django.server "GET /api/skin-concerns/ HTTP/1.1" 200 10578
+[INFO] 2025-12-31 13:35:48 django.server "GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+[INFO] 2026-01-02 10:22:45 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/offers/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/about-us/?isLanding=true HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/landing-bg/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/testimonials/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/treatments/?isLanding=true HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/results/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/clinics/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/why-choose-us/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/landing/faq/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/skin-concerns/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:37 django.server "OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 10:23:38 django.server "GET /api/landing-bg/ HTTP/1.1" 200 115
+[INFO] 2026-01-02 10:23:38 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2026-01-02 10:23:38 django.server "GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+[INFO] 2026-01-02 10:23:38 django.server "GET /api/offers/ HTTP/1.1" 200 2
+[INFO] 2026-01-02 10:23:38 django.server "GET /api/testimonials/ HTTP/1.1" 200 1115
+[INFO] 2026-01-02 10:23:38 django.server "GET /api/results/ HTTP/1.1" 200 3336
+[INFO] 2026-01-02 10:23:39 django.server "GET /api/landing/faq/ HTTP/1.1" 200 52
+[INFO] 2026-01-02 10:23:39 django.server "GET /api/why-choose-us/ HTTP/1.1" 200 565
+[INFO] 2026-01-02 10:23:39 django.server "GET /api/clinics/ HTTP/1.1" 200 1374
+[INFO] 2026-01-02 10:23:39 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2026-01-02 10:23:39 django.server "GET /api/skin-concerns/ HTTP/1.1" 200 10578
+[INFO] 2026-01-02 10:23:39 django.server "GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/offers/ HTTP/1.1" 200 2
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/landing-bg/ HTTP/1.1" 200 115
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/why-choose-us/ HTTP/1.1" 200 565
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/testimonials/ HTTP/1.1" 200 1115
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/results/ HTTP/1.1" 200 3336
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/skin-concerns/ HTTP/1.1" 200 10578
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/clinics/ HTTP/1.1" 200 1374
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/landing/faq/ HTTP/1.1" 200 52
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2026-01-02 10:34:07 django.server "GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+[INFO] 2026-01-02 12:03:03 django.server "GET /api/offers/ HTTP/1.1" 200 2
+[INFO] 2026-01-02 12:03:03 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2026-01-02 12:03:03 django.server "GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+[INFO] 2026-01-02 12:03:03 django.server "GET /api/landing-bg/ HTTP/1.1" 200 115
+[INFO] 2026-01-02 12:03:03 django.server "GET /api/testimonials/ HTTP/1.1" 200 1115
+[INFO] 2026-01-02 12:03:03 django.server "GET /api/why-choose-us/ HTTP/1.1" 200 565
+[INFO] 2026-01-02 12:03:04 django.server "GET /api/clinics/ HTTP/1.1" 200 1374
+[INFO] 2026-01-02 12:03:04 django.server "GET /api/landing/faq/ HTTP/1.1" 200 52
+[INFO] 2026-01-02 12:03:04 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2026-01-02 12:03:04 django.server "GET /api/results/ HTTP/1.1" 200 3336
+[INFO] 2026-01-02 12:03:04 django.server "GET /api/skin-concerns/ HTTP/1.1" 200 10578
+[INFO] 2026-01-02 12:03:04 django.server "GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/offers/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/landing-bg/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/treatments/?isLanding=true HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/about-us/?isLanding=true HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/skin-concerns/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/why-choose-us/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/clinics/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/results/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/landing/faq/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/testimonials/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "OPTIONS /api/site-settings/ HTTP/1.1" 200 0
+[INFO] 2026-01-02 12:46:22 django.server "GET /api/landing-bg/ HTTP/1.1" 200 115
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/site-settings/ HTTP/1.1" 200 807
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/about-us/?isLanding=true HTTP/1.1" 200 1063
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/skin-concerns/ HTTP/1.1" 200 10578
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/offers/ HTTP/1.1" 200 2
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/clinics/ HTTP/1.1" 200 1374
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/landing/faq/ HTTP/1.1" 200 52
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/why-choose-us/ HTTP/1.1" 200 565
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/testimonials/ HTTP/1.1" 200 1115
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/treatments/?isLanding=true HTTP/1.1" 200 6591
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/results/ HTTP/1.1" 200 3336
+[INFO] 2026-01-02 12:46:23 django.server "GET /api/site-settings/ HTTP/1.1" 200 807

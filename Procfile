@@ -1,1 +1,1 @@
-web: gunicorn monalisa_backend.wsgi
+web: gunicorn monalisa_backend.wsgi --timeout 60 --workers 2

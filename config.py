@@ -31,9 +31,24 @@ DEBUG = os.getenv('DEBUG') == 'True'
 ALLOWED_HOSTS = ['*']
 
 # Email Configuration (for appointment notifications)
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'your_email@gmail.com'
-EMAIL_HOST_PASSWORD = 'your_app_password'
-EMAIL_USE_TLS = True
-OWNER_EMAIL = 'owner@monalisawellness.com' 
+# 
+# For Gmail:
+# 1. Enable 2-Step Verification: https://myaccount.google.com/security
+# 2. Generate App Password: https://myaccount.google.com/apppasswords
+# 3. Use the 16-character app password (not your regular password)
+#
+# Set these via environment variables:
+# - EMAIL_HOST_USER: Your email address (e.g., 'yourname@gmail.com')
+# - EMAIL_HOST_PASSWORD: Your app password (16 characters, no spaces)
+# - OWNER_EMAIL: Email to receive appointment notifications
+#
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
+# SSL Certificate Verification
+# Set to 'False' for development/local (fixes macOS SSL certificate issues)
+# Set to 'True' for production (recommended)
+EMAIL_SSL_VERIFY = os.getenv('EMAIL_SSL_VERIFY', 'False').lower() == 'true'
+OWNER_EMAIL = os.getenv('OWNER_EMAIL', 'owner@monalisawellness.com') 

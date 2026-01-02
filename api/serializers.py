@@ -422,38 +422,122 @@ class AppointmentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         appointment = Appointment.objects.create(**validated_data)
         
-        # Send email notification to owner
+        # Send email notification to owner (non-blocking)
+        import threading
+        import logging
         from django.core.mail import send_mail
         from django.conf import settings
         
-        try:
-            clinic_name = appointment.clinic.name if appointment.clinic else 'No clinic specified'
-            subject = f"New Appointment Request - {appointment.full_name} at {clinic_name}"
-            message = f"""
-            New appointment request received:
-            
-            Clinic: {clinic_name}
-            Name: {appointment.full_name}
-            Email: {appointment.email}
-            Phone: {appointment.phone}
-            Preferred Date: {appointment.preferred_date}
-            Preferred Time: {appointment.preferred_time}
-            Treatment Interest: {appointment.treatment_interest}
-            Message: {appointment.message}
-            
-            Please log in to the admin panel to manage this appointment.
-            """
-            
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.OWNER_EMAIL],
-                fail_silently=True,
-            )
-        except Exception as e:
-            # Log the error but don't fail the appointment creation
-            print(f"Failed to send email notification: {e}")
+        logger = logging.getLogger('api.serializers')
+        
+        def send_email_async():
+            try:
+                logger.info("=" * 60)
+                logger.info("EMAIL SENDING PROCESS STARTED")
+                logger.info("=" * 60)
+                
+                clinic_name = appointment.clinic.name if appointment.clinic else 'No clinic specified'
+                subject = f"New Appointment Request - {appointment.full_name} at {clinic_name}"
+                message = f"""
+                New appointment request received:
+                
+                Clinic: {clinic_name}
+                Name: {appointment.full_name}
+                Email: {appointment.email}
+                Phone: {appointment.phone}
+                Preferred Date: {appointment.preferred_date}
+                Preferred Time: {appointment.preferred_time}
+                Treatment Interest: {appointment.treatment_interest}
+                Message: {appointment.message}
+                
+                Please log in to the admin panel to manage this appointment.
+                """
+                
+                # Log email configuration (without sensitive data)
+                logger.info(f"Email Backend: {settings.EMAIL_BACKEND}")
+                logger.info(f"Email Host: {settings.EMAIL_HOST}")
+                logger.info(f"Email Port: {settings.EMAIL_PORT}")
+                logger.info(f"Email Use TLS: {settings.EMAIL_USE_TLS}")
+                logger.info(f"Email Host User: {settings.EMAIL_HOST_USER if settings.EMAIL_HOST_USER else 'NOT SET'}")
+                logger.info(f"Email Host Password: {'SET' if settings.EMAIL_HOST_PASSWORD else 'NOT SET'}")
+                logger.info(f"Default From Email: {settings.DEFAULT_FROM_EMAIL}")
+                logger.info(f"Owner Email (Recipient): {settings.OWNER_EMAIL}")
+                logger.info(f"Email Timeout: {getattr(settings, 'EMAIL_TIMEOUT', 'Not set')}")
+                
+                # Check if credentials are configured
+                if not settings.EMAIL_HOST_USER:
+                    logger.warning("EMAIL_HOST_USER is not configured. Email will not be sent.")
+                    logger.info("=" * 60)
+                    logger.info("EMAIL SENDING PROCESS ABORTED - Missing EMAIL_HOST_USER")
+                    logger.info("=" * 60)
+                    return
+                
+                if not settings.EMAIL_HOST_PASSWORD:
+                    logger.warning("EMAIL_HOST_PASSWORD is not configured. Email will not be sent.")
+                    logger.info("=" * 60)
+                    logger.info("EMAIL SENDING PROCESS ABORTED - Missing EMAIL_HOST_PASSWORD")
+                    logger.info("=" * 60)
+                    return
+                
+                if not settings.OWNER_EMAIL:
+                    logger.warning("OWNER_EMAIL is not configured. Email will not be sent.")
+                    logger.info("=" * 60)
+                    logger.info("EMAIL SENDING PROCESS ABORTED - Missing OWNER_EMAIL")
+                    logger.info("=" * 60)
+                    return
+                
+                logger.info(f"Attempting to send email...")
+                logger.info(f"Subject: {subject}")
+                logger.info(f"From: {settings.DEFAULT_FROM_EMAIL}")
+                logger.info(f"To: {settings.OWNER_EMAIL}")
+                logger.info(f"Message length: {len(message)} characters")
+                
+                # Attempt to send email
+                result = send_mail(
+                    subject,
+                    message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.OWNER_EMAIL],
+                    fail_silently=False,  # Changed to False to get exceptions
+                )
+                
+                if result:
+                    logger.info("✓ Email sent successfully!")
+                    logger.info(f"Email result: {result}")
+                else:
+                    logger.warning("✗ Email sending returned False (may have failed silently)")
+                
+                logger.info("=" * 60)
+                logger.info("EMAIL SENDING PROCESS COMPLETED")
+                logger.info("=" * 60)
+                
+            except Exception as e:
+                # Log detailed error information
+                logger.error("=" * 60)
+                logger.error("EMAIL SENDING FAILED")
+                logger.error("=" * 60)
+                logger.error(f"Error Type: {type(e).__name__}")
+                logger.error(f"Error Message: {str(e)}")
+                logger.error(f"Error Details: {repr(e)}")
+                
+                # Log traceback for debugging
+                import traceback
+                logger.error("Full Traceback:")
+                logger.error(traceback.format_exc())
+                
+                # Log additional context
+                logger.error(f"Appointment ID: {appointment.id}")
+                logger.error(f"Appointment Email: {appointment.email}")
+                logger.error(f"Appointment Name: {appointment.full_name}")
+                
+                logger.error("=" * 60)
+        
+        # Send email in background thread to avoid blocking
+        logger.info(f"Starting email thread for appointment ID: {appointment.id}")
+        email_thread = threading.Thread(target=send_email_async)
+        email_thread.daemon = True
+        email_thread.start()
+        logger.info(f"Email thread started (daemon={email_thread.daemon})")
         
         return appointment
 
@@ -627,10 +711,11 @@ class WhyChooseUsSerializer(serializers.ModelSerializer):
 class TestimonialSerializer(serializers.ModelSerializer):
     """Serializer for testimonials (Google review screenshots)"""
     screenshot = serializers.SerializerMethodField()
+    user_image = serializers.SerializerMethodField()
     
     class Meta:
         model = Testimonial
-        fields = ['id', 'screenshot', 'reviewer_name', 'review_text', 'rating', 'order', 'is_active', 'created_at']
+        fields = ['id', 'screenshot', 'user_image', 'reviewer_name', 'review_text', 'rating', 'order', 'is_active', 'created_at']
     
     def get_screenshot(self, obj):
         if obj.screenshot:
@@ -638,6 +723,14 @@ class TestimonialSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.screenshot.url)
             return obj.screenshot.url
+        return ""
+    
+    def get_user_image(self, obj):
+        if obj.user_image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.user_image.url)
+            return obj.user_image.url
         return ""
 
 

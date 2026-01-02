@@ -186,14 +186,27 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_ALL_ORIGINS = True  # Only for development
 
 # Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Use custom backend that handles SSL certificate verification
+EMAIL_BACKEND = 'api.email_backend.CustomSMTPEmailBackend'
 EMAIL_HOST = globals().get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = globals().get('EMAIL_PORT', 587)
 EMAIL_HOST_USER = globals().get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = globals().get('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = globals().get('EMAIL_USE_TLS', True)
+EMAIL_TIMEOUT = 5  # 5 second timeout for email connections
 DEFAULT_FROM_EMAIL = globals().get('EMAIL_HOST_USER', 'noreply@monalisawellness.com')
 OWNER_EMAIL = globals().get('OWNER_EMAIL', 'owner@monalisawellness.com')
+
+# SSL Certificate Verification
+# Set to False to disable SSL certificate verification (for development/local)
+# Set to True for production (recommended)
+# This can be controlled via environment variable: EMAIL_SSL_VERIFY
+# Defaults to False to fix SSL certificate issues on macOS/local development
+EMAIL_SSL_VERIFY = globals().get('EMAIL_SSL_VERIFY', os.getenv('EMAIL_SSL_VERIFY', 'False').lower() == 'true')
+
+# Use console backend if email credentials are not configured
+if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Admin Interface Configuration
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -206,18 +219,49 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{levelname}] {asctime} {name} {message}',
+            'style': '{',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+        'simple': {
+            'format': '[{levelname}] {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'django.log'),
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
+            'handlers': ['file', 'console'],
             'level': 'INFO',
-            'propagate': True,
+            'propagate': False,
         },
+        'api': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.core.mail': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+    'root': {
+        'handlers': ['file', 'console'],
+        'level': 'INFO',
     },
 }
