@@ -214,12 +214,11 @@ class TreatmentFAQ(models.Model):
 
 
 class Result(models.Model):
-    """Model for before/after results"""
+    """Model for treatment results"""
     condition = models.CharField(max_length=200, help_text="Skin condition treated")
     duration = models.CharField(max_length=100, help_text="Treatment duration or timeline")
     description = models.TextField()
-    before_image = models.ImageField(upload_to='results/before/')
-    after_image = models.ImageField(upload_to='results/after/')
+    result_image = models.ImageField(upload_to='results/', help_text="Result image showing treatment outcome")
     is_featured = models.BooleanField(default=False, help_text="Featured on landing page")
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)

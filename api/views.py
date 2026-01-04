@@ -174,9 +174,9 @@ def results_api(request):
                     serializer = ResultLandingSerializer(result, context={'request': request})
                     return Response(serializer.data)
                 else:
-                    return Response({"beforeImage": "", "afterImage": ""})
+                    return Response({"result_image": ""})
         except Result.DoesNotExist:
-            return Response({"beforeImage": "", "afterImage": ""})
+            return Response({"result_image": ""})
     else:
         # Return all results for normal page
         results = Result.objects.filter(is_active=True)

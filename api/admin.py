@@ -245,7 +245,7 @@ class TreatmentFAQAdmin(admin.ModelAdmin):
 
 @admin.register(Result)
 class ResultAdmin(admin.ModelAdmin):
-    list_display = ['condition', 'duration', 'is_featured', 'is_active', 'created_at', 'images_preview']
+    list_display = ['condition', 'duration', 'is_featured', 'is_active', 'created_at', 'image_preview']
     list_filter = ['is_featured', 'is_active', 'created_at']
     search_fields = ['condition', 'description']
     list_editable = ['is_featured', 'is_active']
@@ -253,35 +253,20 @@ class ResultAdmin(admin.ModelAdmin):
         ('Case Information', {
             'fields': ('condition', 'duration', 'description')
         }),
-        ('Before & After Images', {
-            'fields': ('before_image', 'before_preview', 'after_image', 'after_preview')
+        ('Result Image', {
+            'fields': ('result_image', 'image_preview')
         }),
         ('Display Options', {
             'fields': ('is_featured', 'order', 'is_active')
         }),
     )
-    readonly_fields = ['before_preview', 'after_preview']
+    readonly_fields = ['image_preview']
     
-    def before_preview(self, obj):
-        if obj.before_image:
-            return format_html('<img src="{}" style="max-height: 150px;" />', obj.before_image.url)
+    def image_preview(self, obj):
+        if obj.result_image:
+            return format_html('<img src="{}" style="max-height: 150px;" />', obj.result_image.url)
         return "No image"
-    before_preview.short_description = "Before Image Preview"
-    
-    def after_preview(self, obj):
-        if obj.after_image:
-            return format_html('<img src="{}" style="max-height: 150px;" />', obj.after_image.url)
-        return "No image"
-    after_preview.short_description = "After Image Preview"
-    
-    def images_preview(self, obj):
-        html = ""
-        if obj.before_image:
-            html += f'<img src="{obj.before_image.url}" style="max-height: 60px; margin-right: 5px;" title="Before" />'
-        if obj.after_image:
-            html += f'<img src="{obj.after_image.url}" style="max-height: 60px;" title="After" />'
-        return format_html(html) if html else "No images"
-    images_preview.short_description = "Images"
+    image_preview.short_description = "Result Image Preview"
 
 
 @admin.register(SkinConcern)

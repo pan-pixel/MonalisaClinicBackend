@@ -289,75 +289,47 @@ class TreatmentFAQSerializer(serializers.ModelSerializer):
 
 class ResultSerializer(serializers.ModelSerializer):
     """Serializer for results"""
-    before_image = serializers.SerializerMethodField()
-    after_image = serializers.SerializerMethodField()
+    result_image = serializers.SerializerMethodField()
     is_featured = serializers.ReadOnlyField()
     created_at = serializers.ReadOnlyField()
     
     class Meta:
         model = Result
-        fields = ['id', 'condition', 'duration', 'description', 'before_image', 'after_image', 'is_featured', 'created_at', 'is_active']
+        fields = ['id', 'condition', 'duration', 'description', 'result_image', 'is_featured', 'created_at', 'is_active']
     
-    def get_before_image(self, obj):
-        if obj.before_image:
+    def get_result_image(self, obj):
+        if obj.result_image:
             # Check if it's an external URL (starts with http)
-            if str(obj.before_image).startswith('http'):
-                return str(obj.before_image)
+            if str(obj.result_image).startswith('http'):
+                return str(obj.result_image)
             else:
                 # It's an uploaded file, use Django's URL handling
                 request = self.context.get('request')
                 if request:
-                    return request.build_absolute_uri(obj.before_image.url)
-                return obj.before_image.url
-        return ""
-    
-    def get_after_image(self, obj):
-        if obj.after_image:
-            # Check if it's an external URL (starts with http)
-            if str(obj.after_image).startswith('http'):
-                return str(obj.after_image)
-            else:
-                # It's an uploaded file, use Django's URL handling
-                request = self.context.get('request')
-                if request:
-                    return request.build_absolute_uri(obj.after_image.url)
-                return obj.after_image.url
+                    return request.build_absolute_uri(obj.result_image.url)
+                return obj.result_image.url
         return ""
 
 
 class ResultLandingSerializer(serializers.ModelSerializer):
     """Serializer for results on landing page"""
-    before_image = serializers.SerializerMethodField()
-    after_image = serializers.SerializerMethodField()
+    result_image = serializers.SerializerMethodField()
     
     class Meta:
         model = Result
-        fields = ['before_image', 'after_image']
+        fields = ['result_image']
     
-    def get_before_image(self, obj):
-        if obj.before_image:
+    def get_result_image(self, obj):
+        if obj.result_image:
             # Check if it's an external URL (starts with http)
-            if str(obj.before_image).startswith('http'):
-                return str(obj.before_image)
+            if str(obj.result_image).startswith('http'):
+                return str(obj.result_image)
             else:
                 # It's an uploaded file, use Django's URL handling
                 request = self.context.get('request')
                 if request:
-                    return request.build_absolute_uri(obj.before_image.url)
-                return obj.before_image.url
-        return ""
-    
-    def get_after_image(self, obj):
-        if obj.after_image:
-            # Check if it's an external URL (starts with http)
-            if str(obj.after_image).startswith('http'):
-                return str(obj.after_image)
-            else:
-                # It's an uploaded file, use Django's URL handling
-                request = self.context.get('request')
-                if request:
-                    return request.build_absolute_uri(obj.after_image.url)
-                return obj.after_image.url
+                    return request.build_absolute_uri(obj.result_image.url)
+                return obj.result_image.url
         return ""
 
 
